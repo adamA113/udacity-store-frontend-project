@@ -1,0 +1,31 @@
+<div class="product-details-container">
+    <div class="product-content">
+        <img [src]="product.url" alt="{{ product.name }}" class="product-image">
+        <div class="product-info">
+            <h1 class="product-name">{{ product.name }}</h1>
+            <div class="product-description">{{ product.description }}</div>
+            <div class="product-price">{{ product.price | currency }}</div>
+            <div class="product-controls">
+                <select class="select-input" [(ngModel)]="selectedQuantity">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+
+                @if (!productAddedToCart) {
+                <button class="add-to-cart" (click)="addToCart()">Add to Cart</button>
+                }
+
+                @if (productAddedToCart) {
+                <div class="cart-message">Product added to cart</div>
+                <button class="remove-from-cart" (click)="removeFromCart()">Remove from Cart</button>
+                }
+            </div>
+            <a routerLink="/" class="back-link">
+                <i class="fa-solid fa-arrow-left"></i> Back to product list
+            </a>
+        </div>
+    </div>
+</div>

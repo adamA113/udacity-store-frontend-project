@@ -1,59 +1,42 @@
-# UdacityStoreFrontendProject
+# Udacity Store Frontend Project
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.4.
+## Overview
 
-## Development server
+This is an E-commerce single page application (SPA) project for a store build using Angular Framwork.
 
-To start a local development server, run:
+This application includes:
+* Product list page: displays all available products to add from, with option to select quantity.
+* Product details page: displays more information about any particular product.
+* Cart page: displays the products that the user has added to their cart.
+* Checkout form: collects information about the user.
+* Order confirmation page: shows the outcome after the user completes the checkout process.
 
-```bash
-ng serve
+
+## Run the project
+To run this project on your local machine:
+* Make a forked repo.
+
+* Clone it on your local machine using the following command:
+```
+git clone <the url of your forked repo>
+```
+* cd into the cloned files.
+
+* Then type to install all the required dependencies:
+```
+$ npm install
+```
+* Then the following command to run the server:
+```
+$ ng serve
+```
+* open a new window in your browser and type:
+
+```
+http://localhost:4200/
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+License
+---
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+MIT

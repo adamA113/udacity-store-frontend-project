@@ -1,0 +1,15 @@
+<header class="header-nav-container">
+    <a routerLink="/"
+       class="main-page">
+        My Store
+    </a>
+
+    <nav>
+        <a routerLink="/cart" class="cart-link">
+            <i class="fa-solid fa-cart-arrow-down"></i>Cart
+            @if (cartItemCount > 0) {
+                <span class="cart-badge">{{ cartItemCount }}</span>
+            }
+        </a>
+    </nav>
+</header>

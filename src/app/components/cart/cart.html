@@ -1,0 +1,74 @@
+@if (!cart.length) {
+    <div class="empty-cart-message">
+        <h3>Your cart is empty.</h3>
+    </div>
+} @else {
+    <div class="cart-container">
+        <div class="cart-items">
+            @for (cartItem of cart; track $index) {
+                <div class="cart-item">
+                    <img src="{{ cartItem.product.url }}" alt="{{ cartItem.product.name }}" />
+                    <div class="cart-item-details">
+                        <h3>{{ cartItem.product.name }}</h3>
+                        <span>{{ cartItem.product.price | currency }}</span>
+                        <span>Amount :
+                            <input name="quantity" 
+                                   class="number-input" 
+                                   type="number"
+                                   min="1" 
+                                   [(ngModel)]="cartItem.quantity"
+                                   (ngModelChange)="handleUpdateQuantity()"/>
+                        </span>
+                    </div>
+                    <span class="remove" (click)="handleRemove(cartItem)"><i class="fa-solid fa-x"></i></span>
+                </div>
+            }
+    
+            <p class="cart-total">Total : {{ total | currency }}</p>
+        </div>
+    
+        <form #form="ngForm" class="cart-form" (ngSubmit)="handleSubmit()">
+            <div class="form-input form-margin">
+                <label for="name">Full name</label>
+                <input type="text"
+                       [(ngModel)]="name"
+                       name="name"
+                       required 
+                       minlength="3"
+                       placeholder="(minimum 3 characters)"/>
+            </div>
+
+            <div class="form-input form-margin">
+                <label for="email">Address</label>
+                <input type="text"
+                       [(ngModel)]="address" 
+                       name="address" 
+                       required 
+                       minlength="6"
+                       placeholder="(minimum 6 characters)"/>
+            </div>
+
+            <div class="form-input form-margin">
+                <label for="email">Credit card number</label>
+                <input [(ngModel)]="card"
+                       name="card" 
+                       required 
+                       minlength="16" 
+                       maxlength="16" 
+                       type="tel"
+                       pattern="[0-9\s]{13,19}"
+                       placeholder="(16-digit number)" 
+                       (input)="onCardNumberChanged(card)" />
+                @if(isNumber === false) {
+                    <span class="error">Please enter numbers only !</span>
+                }       
+          
+                <span>Your payment details will be protected.</span>
+            </div>
+            
+            <div class="form-submit">
+                <input type="submit" value="Submit" [disabled]="form.invalid" />
+            </div>
+        </form>
+    </div>
+}
