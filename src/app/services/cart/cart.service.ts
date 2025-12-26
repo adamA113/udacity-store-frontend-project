@@ -43,17 +43,29 @@ export class CartService {
     }
   }
 
+  setItemQuantity(product: ProductModel, quantity: number) {
+    let index = this.cart.findIndex((cartItem) => cartItem.product.id === product.id);
+
+    if (index >= 0) {
+      if (quantity <= 0) {
+        this.cart.splice(index, 1);
+      } else {
+        this.cart[index].quantity = quantity;
+      }
+    } else {
+      if (quantity > 0) {
+        this.cart.push({ product, quantity });
+      }
+    }
+
+    this.updateQuantity();
+  }
+
   updateQuantity() {
     let value = 0;
 
     for (const cartItem of this.cart) {
       value += cartItem.product.price * cartItem.quantity;
-
-      if (cartItem.quantity === 0) {
-        alert(
-          `If the amount is set to 0, the "${cartItem.product.name}" item will be removed from your cart !`
-        );
-      }
     }
 
     this.value = Math.round(value * 100) / 100;

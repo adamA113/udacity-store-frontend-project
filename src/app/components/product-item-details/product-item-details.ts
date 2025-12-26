@@ -53,12 +53,23 @@ export class ProductItemDetails implements OnInit {
   addToCart() {
     this.cartService.addToCart(this.product, this.selectedQuantity);
     this.productAddedToCart = true;
+    window.alert(`${this.product.name} has been added to the cart.`);
   }
 
   removeFromCart() {
     this.cartService.removeFromCart(this.product);
     this.selectedQuantity = 1;
     this.productAddedToCart = false;
+    window.alert(`${this.product.name} has been removed from the cart.`);
+  }
+
+  onQuantityChange(newQuantity: number) {
+    this.selectedQuantity = Number(newQuantity);
+
+    if (this.productAddedToCart) {
+      this.cartService.setItemQuantity(this.product, this.selectedQuantity);
+      window.alert(`The quantity for ${this.product.name} has been updated to ${this.selectedQuantity}.`);
+    }
   }
 
 }

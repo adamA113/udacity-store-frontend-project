@@ -6,7 +6,7 @@
             <div class="product-description">{{ product.description }}</div>
             <div class="product-price">{{ product.price | currency }}</div>
             <div class="product-controls">
-                <select class="select-input" [(ngModel)]="selectedQuantity">
+                <select class="select-input" [(ngModel)]="selectedQuantity" (ngModelChange)="onQuantityChange($event)">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -15,12 +15,9 @@
                 </select>
 
                 @if (!productAddedToCart) {
-                <button class="add-to-cart" (click)="addToCart()">Add to Cart</button>
-                }
-
-                @if (productAddedToCart) {
-                <div class="cart-message">Product added to cart</div>
-                <button class="remove-from-cart" (click)="removeFromCart()">Remove from Cart</button>
+                    <button class="add-to-cart" (click)="addToCart()">Add to Cart</button>
+                } @else {
+                    <button class="remove-from-cart" (click)="removeFromCart()">Remove from Cart</button>
                 }
             </div>
             <a routerLink="/" class="back-link">
@@ -28,4 +25,4 @@
             </a>
         </div>
     </div>
-</div>
+</div> 

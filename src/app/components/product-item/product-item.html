@@ -5,7 +5,7 @@
     <div>{{ product.name }}</div>
     <div>{{ product.description }}</div>
     <div>{{ product.price | currency }}</div>
-    <select class="select-input" [(ngModel)]="selectedQuantity">
+    <select class="select-input" [(ngModel)]="selectedQuantity" (ngModelChange)="onQuantityChange($event)">
         @for (quantity of quantityOptions; track quantity) {
             <option [value]="quantity">{{ quantity }}</option>
         }
@@ -13,10 +13,7 @@
 
     @if (!productAddedToCart) {
         <button class="add-to-cart" (click)="addToCart()">Add to Cart</button>
-    }
-
-    @if (productAddedToCart) {
-        <div>Product added to cart</div>
+    } @else {
         <button class="remove-from-cart" (click)="removeFromCart()">Remove from Cart</button>
     }
 </div>

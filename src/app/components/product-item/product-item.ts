@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, DoCheck } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, DoCheck, Output, EventEmitter } from '@angular/core';
 
 import { ProductModel } from '../../models/shop.model';
 import { CartService } from '../../services/cart/cart.service';
@@ -11,6 +11,7 @@ import { CartService } from '../../services/cart/cart.service';
 })
 export class ProductItem implements OnInit, OnChanges, DoCheck {
   @Input() product!: ProductModel;
+  @Output() add = new EventEmitter<{ product: ProductModel; quantity: number }>();
   
   selectedQuantity = 1;
   productAddedToCart = false;
@@ -46,13 +47,23 @@ export class ProductItem implements OnInit, OnChanges, DoCheck {
   }
 
   addToCart() {
-    this.cartService.addToCart(this.product, this.selectedQuantity);
     this.productAddedToCart = true;
+    this.add.emit({ product: this.product, quantity: this.selectedQuantity });
   }
 
   removeFromCart() {
     this.cartService.removeFromCart(this.product);
     this.selectedQuantity = 1;
     this.productAddedToCart = false;
+    window.alert(`${this.product.name} has been removed from the cart.`);
+  }
+
+  onQuantityChange(newQuantity: number) {
+    this.selectedQuantity = Number(newQuantity);
+
+    if (this.productAddedToCart) {
+      this.cartService.setItemQuantity(this.product, this.selectedQuantity);
+      window.alert(`The quantity for ${this.product.name} has been updated to ${this.selectedQuantity}.`);
+    }
   }
 }
