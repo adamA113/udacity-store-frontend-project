@@ -60,6 +60,9 @@ export class Cart implements OnInit {
 
   handleRemove(cartItem: CartModel) {
     this.cartService.removeFromCart(cartItem.product);
+    const productName = cartItem?.product?.name || 'Product';
+    
+    alert(`${productName} removed from cart.`);
     this.loadCart();
   }
 }
